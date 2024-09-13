@@ -1,0 +1,128 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Staff API",
+      "description": "Staff Management API"
+    },
+    "host": "localhost:4000",
+    "basePath": "/api",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/staff": {
+        "post": {
+          "summary": "Create a new staff",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "mobile_number": {
+                    "example": "any"
+                  },
+                  "email_id": {
+                    "example": "any"
+                  },
+                  "employee_code": {
+                    "example": "any"
+                  },
+                  "access": {
+                    "example": {
+                      "All": "any",
+                      "Dashboard": "any",
+                      "Request Management": "any",
+                      "Company Management":  "any",
+                      "Users Management": "any",
+                      "Content Management":"any",
+                      "Staff Management": "any"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created"
+            }
+          }
+        }
+      },
+      "/staff/{id}": {
+          "get": {
+            "summary": "Get staff details by ID",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "404": {
+                "description": "staff not found"
+              }
+            }
+          }
+        },
+      "/": {
+      "get": {
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number for pagination."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of items per page."
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "summary": "Get all staff details",
+        "responses": {
+          "201": {
+            "description": "All data"
+          },
+          "404": {
+            "description": "Data not found"
+          }
+        }
+      }
+    }
+  }
+}
