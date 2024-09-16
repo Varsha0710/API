@@ -28,11 +28,14 @@ const getAllStaff = async (req: Request, res: Response) => {
     try {
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
-        const status = req.query.status ? parseInt(req.query.status as string) : undefined;
-        const search:any = req.query.search ;
-        const sortAsc = req.query.sortAsc === '1';
+        const search = req.query.search as string | undefined;
+        const sort = req.query.sort ? parseInt(req.query.sort as string, 10) : undefined;
+
+        if (sort !== undefined && sort !== 1 && sort !== 0) {
+            return res.status(400).json({ error: "Invalid sort value. Allowed values are 1 (ASC) or 0 (DESC)." });
+        }
         
-        const staffList = await staffService.getAllStaffs(page, limit, status,search, sortAsc);
+        const staffList = await staffService.getAllStaffs(page, limit,search, sort);
         res.status(200).json(staffList);
     } catch (error: any) {
         res.status(500).json({ error: error.message });

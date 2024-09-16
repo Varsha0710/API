@@ -34,6 +34,9 @@
                   "employee_code": {
                     "example": "any"
                   },
+                  "status":{
+                    "example":"any"
+                  },
                   "access": {
                     "example": {
                       "All": "any",

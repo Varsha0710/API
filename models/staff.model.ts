@@ -27,6 +27,7 @@ const staff = sequelize.define<Model<staffAttributes,staffCreationAttributes>>('
       mobile_number:{
         type: DataTypes.BIGINT,
         allowNull:false,
+        unique: true
       },
       email_id: {
         type: DataTypes.STRING,
@@ -35,10 +36,14 @@ const staff = sequelize.define<Model<staffAttributes,staffCreationAttributes>>('
       employee_code: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
       status:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          isIn: [[1, 2, 3, 4]] 
+        }
       },
       createdAt:{
         type: DataTypes.DATE,

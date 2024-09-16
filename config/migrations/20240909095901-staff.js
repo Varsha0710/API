@@ -23,7 +23,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        where: {
+          status: [1, 2, 3, 4],
+        },
       },
       createdAt: {
         type: Sequelize.DATE,

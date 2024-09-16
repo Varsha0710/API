@@ -43,16 +43,11 @@ const getStaffDetails = async (id: number) => {
     return staffDetails;
 }
 
-const getAllStaffs = async (  page: number, limit: number, status?: number, search?: string, sortAsc?: boolean) => {
-    if (status !== undefined && ![1, 2, 3, 4].includes(status)) {        
-        return {error: "Invalid status number. Allowed values are 1, 2, 3, or 4." };
-    }    
+const getAllStaffs = async (  page: number, limit: number, search?: string, sort?: number ) => {
+ 
     const offset = (page - 1) * limit;
     const whereCondition: any = {};
-    
-    if (status !== undefined) {
-        whereCondition.status = status || { [Op.ne]: 4 };
-    }
+    whereCondition.status = { [Op.ne]: 4 };
   
     if (search) {
         whereCondition.name = {
@@ -67,8 +62,8 @@ const getAllStaffs = async (  page: number, limit: number, status?: number, sear
         offset,
     };
   
-    if (sortAsc !== undefined) {
-        queryOptions.order = [['name', sortAsc ? 'ASC' : 'DESC']];
+    if (sort === 1 || sort === 0) {
+        queryOptions.order = [['name', sort === 1  ? 'ASC' : 'DESC']];
     }
 
     const staffList = await staff.findAll(queryOptions);
